@@ -11,3 +11,29 @@ dependencies {
     compile 'org.projectlombok:lombok:1.12.6'
     testCompile 'junit:junit:4.11'
 }
+
+task delombok {
+    def srcDelomboked = 'build/src-delomboked'
+    def srcJava = 'src/main/java'
+
+    // delombok task may depend on other projects already being compiled
+    dependsOn configurations.compile.getTaskDependencyFromProjectDependency(true, "compileJava")
+
+    // Set up incremental build, must be made in the configuration phase (not doLast)
+    inputs.files file(srcJava)
+    outputs.dir file(srcDelomboked)
+
+    doLast {
+        def collection = files(configurations.compile)
+        def sumTree = collection + fileTree(dir: 'bin')
+
+        ant.taskdef(name: 'delombok',
+                classname: 'lombok.delombok.ant.DelombokTask', classpath: configurations.compile.asPath)
+        ant.delombok(from:srcJava, to:srcDelomboked, classpath: sumTree.asPath)
+
+        copy {
+            from srcDelomboked
+            into srcJava
+        }
+    }
+}
