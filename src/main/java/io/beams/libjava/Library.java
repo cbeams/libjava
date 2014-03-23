@@ -1,3 +1,5 @@
+package io.beams.libjava;
+
 import lombok.Data;
 
 @Data
