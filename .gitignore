@@ -7,3 +7,6 @@ build
 !.idea/README.md
 !.idea/inspectionProfiles
 *.iml
+
+# Vim
+*.sw[o|p]
