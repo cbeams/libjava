@@ -1,12 +1,12 @@
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 public class LibraryTest {
 
     @Test
     public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
+        assertThat(new Library().someLibraryMethod(), is(true));
     }
 }
