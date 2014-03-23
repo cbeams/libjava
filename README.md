@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cbeams/libjava.svg?branch=master)](https://travis-ci.org/cbeams/libjava)
+
 # Build instructions
 
     ./gradlew build

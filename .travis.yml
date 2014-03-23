@@ -1,0 +1,6 @@
+# Configuration for CI build at https://travis-ci.org/cbeams/libjava
+
+language: java
+
+jdk:
+  - oraclejdk8
