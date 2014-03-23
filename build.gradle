@@ -1,4 +1,15 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.3'
+    }
+}
+
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'bintray'
 
 sourceCompatibility = 1.8
 
@@ -10,6 +21,30 @@ dependencies {
     compile 'org.slf4j:slf4j-api:1.7.5'
     compile 'org.projectlombok:lombok:1.12.6'
     testCompile 'junit:junit:4.11'
+}
+
+artifacts {
+    archives jar
+}
+
+publishing {
+    publications {
+        groovyMaven(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+bintray {
+    user = project.hasProperty('bintrayUser') ? project.getProperty('bintrayUser') : 'fake_user'
+    key = project.hasProperty('bintrayKey') ? project.getProperty('bintrayKey') : 'fake_key'
+    println "KEY: $key"
+    publications = ['groovyMaven']
+    pkg {
+        repo = 'libjava'
+        name = 'libjava'
+        licenses = ['Unlicense']
+    }
 }
 
 task delombok {
