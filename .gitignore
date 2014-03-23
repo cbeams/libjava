@@ -4,4 +4,6 @@ build
 
 # IDEA (13.1 or better; import project from build.gradle)
 .idea
+!.idea/README.md
+!.idea/inspectionProfiles
 *.iml
