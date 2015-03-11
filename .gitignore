@@ -10,3 +10,6 @@ build
 
 # Vim
 *.sw[o|p]
+
+# Misc
+TODO*
